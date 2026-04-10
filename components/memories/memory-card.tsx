@@ -1,5 +1,6 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Pencil, Trash2, Terminal, MessageCircle, Hand } from 'lucide-react'
 import type { Memory } from '@/types'
@@ -33,6 +34,7 @@ export function MemoryCard({
   onDelete: (id: string) => void
 }) {
   const SourceIcon = sourceIcon[memory.source] || Terminal
+  const router = useRouter()
 
   return (
     <motion.div
@@ -40,7 +42,8 @@ export function MemoryCard({
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.04, duration: 0.3 }}
       whileHover={{ y: -3, transition: { duration: 0.2 } }}
-      className="group glass-card relative cursor-default"
+      className="group glass-card relative cursor-pointer"
+      onClick={() => router.push(`/memories/${memory.id}`)}
     >
       {/* Similarity badge */}
       {memory.similarity !== undefined && (
@@ -54,13 +57,13 @@ export function MemoryCard({
         <h3 className="text-[15px] font-semibold leading-snug truncate pr-2">{memory.title}</h3>
         <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
           <button
-            onClick={() => onEdit(memory)}
+            onClick={(e) => { e.stopPropagation(); onEdit(memory) }}
             className="h-7 w-7 rounded-lg flex items-center justify-center text-[var(--muted-foreground)] hover:text-foreground hover:bg-white/5 transition-all"
           >
             <Pencil size={13} />
           </button>
           <button
-            onClick={() => onDelete(memory.id)}
+            onClick={(e) => { e.stopPropagation(); onDelete(memory.id) }}
             className="h-7 w-7 rounded-lg flex items-center justify-center text-[var(--muted-foreground)] hover:text-[#f87171] hover:bg-[#f87171]/10 transition-all"
           >
             <Trash2 size={13} />

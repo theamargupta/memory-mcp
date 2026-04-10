@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Loader2 } from 'lucide-react'
 import type { Memory, MemoryCategory } from '@/types'
@@ -29,6 +29,14 @@ export function MemoryForm({ open, onOpenChange, memory, onSave }: MemoryFormPro
   const [category, setCategory] = useState<MemoryCategory>(memory?.category || 'note')
   const [tagsInput, setTagsInput] = useState(memory?.tags.join(', ') || '')
   const [project, setProject] = useState(memory?.project || '')
+
+  useEffect(() => {
+    setTitle(memory?.title || '')
+    setContent(memory?.content || '')
+    setCategory(memory?.category || 'note')
+    setTagsInput(memory?.tags?.join(', ') || '')
+    setProject(memory?.project || '')
+  }, [memory])
   const [saving, setSaving] = useState(false)
 
   async function handleSubmit(e: React.FormEvent) {
