@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { LayoutGrid, Brain, Shield, FolderOpen, Settings, Sparkles } from 'lucide-react'
+import { LayoutGrid, Brain, Shield, FolderOpen, Settings, Sparkles, Heart } from 'lucide-react'
 
 const navItems = [
   { title: 'Dashboard', href: '/dashboard', icon: LayoutGrid },
@@ -89,6 +89,14 @@ export function AppSidebar() {
         <Link href="/by-amar" className="block text-[11px] text-[var(--muted-foreground)]/60 hover:text-[#818cf8] transition-colors">
           Built by Amar &rarr;
         </Link>
+        <a
+          href="https://ko-fi.com/amargupta"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-1.5 text-[11px] text-[var(--muted-foreground)]/60 hover:text-[#ff5e5b] transition-colors"
+        >
+          <Heart size={10} /> Support on Ko-fi
+        </a>
       </div>
     </aside>
   )

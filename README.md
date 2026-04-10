@@ -19,6 +19,7 @@ claude mcp add --transport http memory-mcp https://your-domain.com/api/mcp
 ![Supabase](https://img.shields.io/badge/Supabase-3FCF8E?logo=supabase&logoColor=fff)
 ![MCP](https://img.shields.io/badge/MCP-Protocol-blue)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow)
+[![Ko-fi](https://img.shields.io/badge/Ko--fi-Support%20Me-ff5e5b?logo=ko-fi&logoColor=white)](https://ko-fi.com/amargupta)
 
 ---
 
