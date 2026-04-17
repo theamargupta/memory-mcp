@@ -5,6 +5,15 @@
 ## Overview
 MCP server that solves AI context amnesia. Store knowledge once, serve it to all AI tools (Claude Code, Claude Chat, Cursor, Codex). 8 MCP tools, semantic search via pgvector, visual rules editor, multi-project scoping, OAuth 2.0 with PKCE.
 
+## Nested Context
+Area-specific rules live in nested CLAUDE.md files. When editing in these paths, consult the local file:
+- `app/` — App Router, route groups (auth/dashboard/marketing)
+- `app/api/` — API route conventions (MCP + REST)
+- `lib/mcp/` — MCP server factory, tools, OAuth
+- `lib/supabase/` — client selection (service-role vs SSR vs browser)
+- `supabase/` — migrations, RLS, Edge Function
+- `components/ui/` — ShadCN (auto-managed)
+
 ## Tech Stack
 - Next.js 16.2.x (App Router, Server Components)
 - React 19, TypeScript strict mode
