@@ -1,169 +1,116 @@
-'use client'
+import Link from 'next/link'
+import type { Metadata } from 'next'
 
-import { Suspense, useState } from 'react'
-import { createClient } from '@/lib/supabase/client'
-import { useSearchParams } from 'next/navigation'
-import { motion } from 'framer-motion'
-import { Loader2 } from 'lucide-react'
+export const metadata: Metadata = {
+  title: 'Memory MCP sign-in is invite-only',
+  description:
+    'Memory MCP is a dogfooded portfolio piece by Amar Gupta. Sign-in is invite-only. See the architecture, watch the demo, or request access.',
+  alternates: { canonical: '/login' },
+  robots: { index: true, follow: true },
+}
 
 export default function LoginPage() {
   return (
-    <Suspense>
-      <LoginForm />
-    </Suspense>
-  )
-}
-
-function LoginForm() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [isSignUp, setIsSignUp] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [message, setMessage] = useState<string | null>(null)
-  const [loading, setLoading] = useState(false)
-  const searchParams = useSearchParams()
-  const next = searchParams.get('next') || '/memories'
-
-  const supabase = createClient()
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault()
-    setError(null)
-    setMessage(null)
-    setLoading(true)
-
-    if (isSignUp) {
-      const { error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}`,
-        },
-      })
-      if (error) {
-        setError(error.message)
-      } else {
-        setMessage('Check your email for a confirmation link.')
-      }
-    } else {
-      const { error } = await supabase.auth.signInWithPassword({ email, password })
-      if (error) {
-        setError(error.message)
-      } else {
-        window.location.href = next
-      }
-    }
-
-    setLoading(false)
-  }
-
-  return (
     <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden bg-mesh">
-      {/* Ambient orbs */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] rounded-full bg-[#6366f1]/8 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] rounded-full bg-[#22d3ee]/5 blur-[100px] pointer-events-none" />
+      <div
+        aria-hidden
+        className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] rounded-full bg-[#6366f1]/8 blur-[120px] pointer-events-none"
+      />
+      <div
+        aria-hidden
+        className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] rounded-full bg-[#22d3ee]/5 blur-[100px] pointer-events-none"
+      />
 
-      <motion.div
-        initial={{ opacity: 0, y: 20, scale: 0.98 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.5 }}
-        className="w-full max-w-sm relative z-10"
-      >
-        {/* Logo */}
-        <div className="flex items-center gap-2.5 justify-center mb-10">
+      <div className="w-full max-w-[560px] relative z-10">
+        <div className="flex items-center gap-2.5 justify-center mb-8">
           <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-[#6366f1] to-[#818cf8] flex items-center justify-center shadow-lg shadow-[#6366f1]/20">
             <span className="text-white font-bold text-sm font-mono">M</span>
           </div>
           <span className="font-heading font-bold text-lg tracking-tight">Memory MCP</span>
         </div>
 
-        {/* Card */}
-        <div className="rounded-2xl border border-[var(--glass-border)] bg-[var(--glass)] backdrop-blur-2xl p-7 space-y-6 shadow-2xl shadow-black/20">
-          <div className="text-center space-y-1.5">
-            <h1 className="text-xl font-heading font-bold">
-              {isSignUp ? 'Create your account' : 'Welcome back'}
-            </h1>
-            <p className="text-sm text-[var(--muted-foreground)]">
-              {isSignUp ? 'Start building your AI knowledge layer' : 'Sign in to your memory bank'}
+        <div className="rounded-2xl border border-[var(--glass-border)] bg-[var(--glass)] backdrop-blur-2xl p-7 shadow-2xl shadow-black/20">
+          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#818cf8]">
+            Invite-only
+          </p>
+          <h1 className="mt-2 text-[22px] font-heading font-bold tracking-[-0.01em]">
+            Sign-in is closed by design.
+          </h1>
+          <p className="mt-3 text-[13px] leading-relaxed text-[var(--muted-foreground)]">
+            Memory MCP is part of{' '}
+            <Link
+              href="https://amargupta.tech"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-foreground underline decoration-[#6366f1] decoration-2 underline-offset-4 hover:text-[#818cf8]"
+            >
+              Amar Gupta&apos;s
+            </Link>{' '}
+            portfolio &mdash; a dogfooded MCP server giving Claude, Cursor, and
+            Codex a shared semantically-searchable memory. Built on real OpenAI
+            embeddings, OAuth 2.0 + PKCE, and live Supabase pgvector
+            infrastructure. Public access would leak secrets and rate-limit the
+            apps demoed to recruiters, so the gate stays on.
+          </p>
+
+          <div className="mt-6 grid gap-2.5 sm:grid-cols-2">
+            <Link
+              href="/"
+              className="rounded-xl border border-[var(--glass-border)] bg-white/[0.03] px-4 py-2.5 text-center text-[13px] text-foreground hover:border-[#6366f1]/40"
+            >
+              See the architecture &rarr;
+            </Link>
+            <Link
+              href="/about"
+              className="rounded-xl border border-[var(--glass-border)] bg-white/[0.03] px-4 py-2.5 text-center text-[13px] text-foreground hover:border-[#6366f1]/40"
+            >
+              About the builder &rarr;
+            </Link>
+            <Link
+              href="https://amargupta.tech"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-xl border border-[var(--glass-border)] bg-white/[0.03] px-4 py-2.5 text-center text-[13px] text-foreground hover:border-[#6366f1]/40"
+            >
+              Portfolio site &rarr;
+            </Link>
+            <Link
+              href="mailto:theamargupta.tech@gmail.com?subject=Memory%20MCP%20demo%20access%20request"
+              className="rounded-xl bg-[#6366f1] px-4 py-2.5 text-center text-[13px] font-medium text-white hover:bg-[#818cf8] glow-primary"
+            >
+              Request demo access &rarr;
+            </Link>
+          </div>
+
+          <div className="mt-8 border-t border-[var(--glass-border)] pt-6">
+            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--muted-foreground)]/60">
+              What Memory MCP is
+            </p>
+            <p className="mt-2 text-[13px] leading-relaxed text-[var(--muted-foreground)]">
+              An open-source MCP server giving any agent (Claude, Cursor, Codex)
+              a shared, semantically-searchable memory store. 8 MCP tools, OAuth
+              2.0 + PKCE, pgvector embeddings via Supabase Edge Function
+              (gte-small, 384-dim), soft-delete-only model. Used by Sutra to
+              index project history for cross-session continuity.
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-1.5">
-              <label htmlFor="email" className="text-[11px] font-mono uppercase tracking-widest text-[var(--muted-foreground)]/60">
-                Email
-              </label>
-              <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@example.com"
-                required
-                className="w-full h-10 px-3.5 rounded-xl border border-[var(--glass-border)] bg-white/[0.03] text-sm text-foreground placeholder:text-[var(--muted-foreground)]/40 focus:outline-none focus:border-[#6366f1]/50 focus:ring-2 focus:ring-[#6366f1]/10 transition-all"
-              />
-            </div>
-
-            <div className="space-y-1.5">
-              <label htmlFor="password" className="text-[11px] font-mono uppercase tracking-widest text-[var(--muted-foreground)]/60">
-                Password
-              </label>
-              <input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Min 6 characters"
-                required
-                minLength={6}
-                className="w-full h-10 px-3.5 rounded-xl border border-[var(--glass-border)] bg-white/[0.03] text-sm text-foreground placeholder:text-[var(--muted-foreground)]/40 focus:outline-none focus:border-[#6366f1]/50 focus:ring-2 focus:ring-[#6366f1]/10 transition-all"
-              />
-            </div>
-
-            {error && (
-              <div className="text-sm text-[#f87171] bg-[#f87171]/10 rounded-xl px-3.5 py-2.5 border border-[#f87171]/20">{error}</div>
-            )}
-            {message && (
-              <div className="text-sm text-[#34d399] bg-[#34d399]/10 rounded-xl px-3.5 py-2.5 border border-[#34d399]/20">{message}</div>
-            )}
-
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full h-10 rounded-xl bg-[#6366f1] text-white text-sm font-semibold hover:bg-[#818cf8] transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed glow-primary flex items-center justify-center gap-2"
+          <p className="mt-6 text-center text-[12px] text-[var(--muted-foreground)]/60">
+            Operator?{' '}
+            <Link
+              href="/admin/login"
+              className="text-[#818cf8] underline-offset-2 hover:underline"
             >
-              {loading ? (
-                <>
-                  <Loader2 size={14} className="animate-spin" />
-                  Loading...
-                </>
-              ) : isSignUp ? 'Create Account' : 'Sign In'}
-            </button>
-          </form>
-
-          <div className="text-center">
-            <button
-              type="button"
-              className="text-sm text-[var(--muted-foreground)] hover:text-foreground transition-colors"
-              onClick={() => {
-                setIsSignUp(!isSignUp)
-                setError(null)
-                setMessage(null)
-              }}
-            >
-              {isSignUp ? 'Already have an account?' : "Don't have an account?"}{' '}
-              <span className="text-[#818cf8] font-medium">
-                {isSignUp ? 'Sign in' : 'Sign up'}
-              </span>
-            </button>
-          </div>
+              Admin sign-in
+            </Link>
+          </p>
         </div>
 
         <p className="text-center text-[11px] text-[var(--muted-foreground)]/50 mt-6 font-mono flex items-center justify-center gap-1.5">
-          <span className="h-1 w-1 rounded-full bg-[#34d399]/50" />
-          Your data stays in your Supabase instance.
+          <span aria-hidden className="h-1 w-1 rounded-full bg-[#34d399]/50" />
+          Built by Amar Gupta · portfolio piece
         </p>
-      </motion.div>
+      </div>
     </div>
   )
 }
