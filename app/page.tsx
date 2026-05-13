@@ -96,6 +96,9 @@ export default function LandingPage() {
           <span className="font-heading font-semibold text-sm tracking-tight">Memory MCP</span>
         </div>
         <div className="flex items-center gap-3">
+          <Link href="/about" className="hidden sm:inline text-sm text-[var(--muted-foreground)] hover:text-foreground transition-colors">
+            About
+          </Link>
           <Link href="/login" className="text-sm text-[var(--muted-foreground)] hover:text-foreground transition-colors">
             Sign In
           </Link>
@@ -381,6 +384,7 @@ export default function LandingPage() {
             >
               <KofiIcon /> Support on Ko-fi
             </a>
+            <Link href="/about" className="hover:text-[#818cf8] transition-colors">About</Link>
             <Link href="/by-amar" className="hover:text-[#818cf8] transition-colors">Built by Amar Gupta</Link>
             <span className="font-mono">MIT</span>
           </div>

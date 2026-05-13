@@ -23,6 +23,23 @@ claude mcp add --transport http memory-mcp https://your-domain.com/api/mcp
 
 ---
 
+## Built by Amar Gupta — portfolio piece
+
+Memory MCP is part of an eight-product portfolio of dogfooded MCP / AI / full-stack apps by **[Amar Gupta](https://amargupta.tech)** — senior / staff full-stack + AI engineer, open to hiring conversations.
+
+- **Portfolio:** [amargupta.tech](https://amargupta.tech)
+- **GitHub:** [@theamargupta](https://github.com/theamargupta)
+- **LinkedIn:** [in/theamargupta](https://www.linkedin.com/in/theamargupta/)
+- **Email:** [theamargupta.tech@gmail.com](mailto:theamargupta.tech@gmail.com)
+- **Live demo:** [mcp.devfrend.com](https://mcp.devfrend.com)
+- **Case study:** [`PORTFOLIO.md`](./PORTFOLIO.md) · **About page:** [mcp.devfrend.com/about](https://mcp.devfrend.com/about)
+
+**Sibling products in the same portfolio:** [Setu](https://setu.devfrend.com) (chat relay) · [Sandesh](https://sandesh.devfrend.com) (content publishing) · [Sankalp](https://sankalp.devfrend.com) (job autopilot) · [Swayam](https://swayam.devfrend.com) (automation routines) · [Sathi](https://sathi.devfrend.com) (personal manager) · [Sutra](https://sutra.devfrend.com) (desktop relay) · [project-memory](https://pm.devfrend.com) (multi-tenant memory MCP) · [ai-chat-devfrend](https://devfrend.com) (RAG chatbot platform).
+
+> Memory MCP is the **knowledge layer** underneath the rest — what every AI tool reads from when it needs to remember who you are. 8 MCP tools, OAuth 2.0 + PKCE, pgvector semantic search, soft-delete-only data model, Next.js 16 + Tailwind v4 dashboard. Open source, MIT licensed, self-hostable.
+
+---
+
 ## Screenshots
 
 ![Dashboard Overview](./docs/screenshots/dashboard.png)

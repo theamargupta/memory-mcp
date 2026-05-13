@@ -2,6 +2,27 @@
   "name": "memory-mcp",
   "version": "0.1.0",
   "private": true,
+  "description": "Open-source MCP server that gives Claude, Cursor, and Codex a shared, semantically-searchable memory — OAuth 2.0 + PKCE, pgvector embeddings, soft-delete data model. Portfolio piece by Amar Gupta — see https://amargupta.tech and https://mcp.devfrend.com/about.",
+  "author": "Amar Gupta <theamargupta.tech@gmail.com> (https://amargupta.tech)",
+  "license": "MIT",
+  "homepage": "https://mcp.devfrend.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theamargupta/memory-mcp.git"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "claude",
+    "cursor",
+    "codex",
+    "ai-memory",
+    "semantic-search",
+    "pgvector",
+    "supabase",
+    "oauth",
+    "portfolio"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
